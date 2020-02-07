@@ -1,0 +1,40 @@
+# Step 1. Enabling PowerShell Remoting
+# Open the PowerShell with administrative privileges on the remote computer and execute the following command:
+
+Enable-PSRemoting -Force
+
+# This command starts the WinRM service and creates a firewall rule to allow incoming connections. The -force option avoids PowerShell to prompt you for confirmation at each step.
+
+# Step 2. Configure TrustedHosts
+# On both computers, configure the TrustedHosts setting so they know each other. Execute the following command on both computers to do so:
+
+winrm set winrm/config/client '@{TrustedHosts="
+
+#######
+# Add all domain computers to the TrustedHosts list
+# In the following command, replace .yourdomain.com with your own domain name.
+
+Set-Item WSMan:\localhost\Client\TrustedHosts *.yourdomain.com
+#######
+
+# Step 3. Restart WinRM Service
+# Run the following command to restart the WinRM service now:
+
+Restart-Service WinRM
+
+# Step 4. Test the Connection
+# To test your configuration, execute the following command on the local computer:
+
+Test-WsMan <RemoteCOMPUTERName>
+
+# For the configuration to be successful, this command should execute without errors and show the information of the WinRM service of the remote computer.
+# Create a PowerShell Session and Execute Commands
+# Now when both computers have been configured, you can create a session using the following commands (Execute these commands with elevated privileges):
+
+$cred=Get-Credential
+$sess = New-PSSession -Credential $cred -ComputerName <remotemachinename>
+Enter-PSSession $sess
+<Run commands in remote session>
+Exit-PSSession
+Remove-PSSession $sess
+

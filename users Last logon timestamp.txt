@@ -1,0 +1,2 @@
+get-aduser -f {name -like 'desk*'} -properties * | Select CN,@{n="lastLogonTimestamp";e={[datetime]::FromFileTime($_.lastLogon)}}
+

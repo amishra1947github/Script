@@ -1,0 +1,5 @@
+:: list all shres
+Get-SmbShare
+
+::get details about given shared folder
+get-smbshareaccess -Name "IT-Helpdesk" | ft name, AccountName, AccessRight >> d:\share_report.txt

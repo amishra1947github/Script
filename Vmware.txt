@@ -1,0 +1,11 @@
+Esxi host inventory 
+
+# Memory. No of DIMM and size
+smbiosDump | grep "Size:"
+
+# NIC
+smbiosDump | grep "String 3:" | grep "Ethernet"
+or 
+ esxcli network nic list
+
+ 
