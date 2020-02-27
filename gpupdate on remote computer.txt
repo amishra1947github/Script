@@ -1,0 +1,1 @@
+Invoke-GPUpdate -Computer gil-mc-D0020 -RandomDelayInMinutes 0 -Force

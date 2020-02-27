@@ -1,0 +1,3 @@
+get-smbshare | where Description -ne 'Default share' 
+
+get-smbshare | where Description -ne 'Default share'  | Get-SmbShareAccess | ft Name, AccountName, AccessRight -AutoSize

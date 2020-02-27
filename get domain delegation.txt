@@ -1,0 +1,4 @@
+dsacls "ou=mumbai,dc=gh,dc=local"
+or
+
+Get-Acl -Path "AD:\OU=Domain Controllers,DC=wingtiptoys,DC=local" |  Select-Object -ExpandProperty Access
